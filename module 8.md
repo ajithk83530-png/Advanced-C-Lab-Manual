@@ -16,21 +16,39 @@ Algorithm:
  
 Program:
 
-//type your code here
+```
+#include <stdio.h>
 
+int main()
+{
+    int n;
 
+    scanf("%d", &n);
 
+    switch(n)
+    {
+        case 0: printf("zero"); break;
+        case 1: printf("one"); break;
+        case 2: printf("two"); break;
+        case 3: printf("three"); break;
+        case 4: printf("four"); break;
+        case 5: printf("five"); break;
+        case 6: printf("six"); break;
+        case 7: printf("seven"); break;
+        case 8: printf("eight"); break;
+        case 9: printf("nine"); break;
+        default: printf("invalid");
+    }
 
+    return 0;
+}
+```
 Output:
 
-
-//paste your output here
-
-
-
-
-
-
+```
+5
+five
+```
 Result:
 Thus, the program is verified successfully
  
@@ -46,22 +64,44 @@ Algorithm:
 6.	End
  
 Program:
+```
+#include <stdio.h>
 
-//type your code here
+int main()
+{
+    int n, digit;
+    int freq[10] = {0};
 
+    scanf("%d", &n);
 
+    if (n == 0)
+    {
+        freq[0] = 1;
+    }
+    else
+    {
+        while (n > 0)
+        {
+            digit = n % 10;
+            freq[digit]++;
+            n = n / 10;
+        }
+    }
 
+    for (int i = 0; i < 10; i++)
+    {
+        printf("%d ", freq[i]);
+    }
+
+    return 0;
+}
+```
 
 Output:
-
-
-//paste your output here
-
-
-
-
-
-
+```
+1223344556
+0 1 2 2 2 2 1 0 0 0
+```
 Result:
 Thus, the program is verified successfully
 
@@ -83,22 +123,80 @@ Free the memory allocated for each string in s Free the memory allocated for s
 7.	End
  
 Program:
+```
+#include <stdio.h>
+#include <string.h>
 
-//type your code here
+// Function to swap two characters
+void swap(char *a, char *b)
+{
+    char temp = *a;
+    *a = *b;
+    *b = temp;
+}
 
+// Function to sort the string
+void sort(char str[], int n)
+{
+    int i, j;
+    for(i = 0; i < n - 1; i++)
+    {
+        for(j = i + 1; j < n; j++)
+        {
+            if(str[i] > str[j])
+            {
+                swap(&str[i], &str[j]);
+            }
+        }
+    }
+}
 
+// Function to generate permutations
+void permute(char str[], int l, int r)
+{
+    int i;
 
+    if(l == r)
+    {
+        printf("%s\n", str);
+        return;
+    }
 
+    for(i = l; i <= r; i++)
+    {
+        swap(&str[l], &str[i]);
+        sort(str + l + 1, r - l);
+        permute(str, l + 1, r);
+        swap(&str[l], &str[i]);
+        sort(str + l, r - l + 1);
+    }
+}
+
+int main()
+{
+    char str[20];
+
+    scanf("%s", str);
+
+    int n = strlen(str);
+
+    sort(str, n);
+
+    permute(str, 0, n - 1);
+
+    return 0;
+}
+```
 Output:
-
-
-//paste your output here
-
-
-
-
-
-
+```
+ABC
+ABC
+ACB
+BAC
+BCA
+CAB
+CBA
+```
 Result:
 Thus, the program is verified successfully
  
@@ -116,22 +214,54 @@ Algorithm:
 7.	End
  
 Program:
+```
+#include <stdio.h>
 
-//type your code here
+int main()
+{
+    int n;
+    scanf("%d", &n);
 
+    int size = 2 * n - 1;
 
+    for (int i = 0; i < size; i++)
+    {
+        for (int j = 0; j < size; j++)
+        {
+            int top = i;
+            int left = j;
+            int right = size - 1 - j;
+            int bottom = size - 1 - i;
 
+            int min = top;
+
+            if (left < min)
+                min = left;
+            if (right < min)
+                min = right;
+            if (bottom < min)
+                min = bottom;
+
+            printf("%d ", n - min);
+        }
+        printf("\n");
+    }
+
+    return 0;
+}
+```
 
 Output:
-
-
-//paste your output here
-
-
-
-
-
-
+```
+4
+4 4 4 4 4 4 4
+4 3 3 3 3 3 4
+4 3 2 2 2 3 4
+4 3 2 1 2 3 4
+4 3 2 2 2 3 4
+4 3 3 3 3 3 4
+4 4 4 4 4 4 4
+```
 Result:
 Thus, the program is verified successfully
 
@@ -155,22 +285,37 @@ o	Call the square() function and display the result.
 5.	End.
 
 Program:
+```
+#include <stdio.h>
 
-//type your code here
+int square();
 
+int main()
+{
+    int result;
 
+    result = square();
 
+    printf("Square = %d", result);
 
+    return 0;
+}
+
+int square()
+{
+    int n;
+
+    printf("Enter a number: ");
+    scanf("%d", &n);
+
+    return n * n;
+}
+```
 Output:
-
-
-//paste your output here
-
-
-
-
-
-
+```
+Enter a number: 6
+Square = 36
+```
 Result:
 Thus, the program is verified successfully
 
