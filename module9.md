@@ -12,12 +12,20 @@ Algorithm:
 7.	Use the display function to visualize the stack's contents
  
 Program:
-
-//type your code here
-
+```
+int stack[100],top,i;
+void display()
+{
+    for(i=top;i>=0;i--)
+    {
+        printf("%d\n",stack[i]);
+    }
+}
+```
 Output:
 
-//paste your output here
+<img width="361" height="517" alt="image" src="https://github.com/user-attachments/assets/e80f5582-8bfd-4ca9-92c1-5c9f5928309e" />
+
 
 
 
@@ -35,15 +43,25 @@ Algorithm:
 4.	Call the push function as needed.
  
 Program:
-
-//type your code here
+```
+char stack[100];
+int size=3,top=-1;
+void push (char data)
+{
+    if(top==size-1)
+    {
+        printf("stack is full\n");
+    }
+    else
+    {
+        top++;
+        stack[top]=data;
+    }
+}
+```
 
 Output:
-
-//paste your output here
-
-
-
+<img width="485" height="541" alt="image" src="https://github.com/user-attachments/assets/19e68020-ab31-4cfc-9fb3-423767e2047c" />
 
 Result:
 Thus, the program to push the given element in to a stack using array is verified successfully
@@ -61,12 +79,26 @@ Algorithm:
 4.	Call the display function and perform other queue operations as needed.
  
 Program:
-
-//type your code here
-
+```
+float queue[100];
+int front,rear,i;
+void display()
+{
+    if(front==-1)
+    {
+        printf("No elements to display");
+    }
+    else
+    {
+        for(i=front;i<=rear;i++)
+        {
+            printf("%.1f ",queue[i]);
+        }
+    }
+}
+```
 Output:
-
-//paste your output here
+<img width="706" height="517" alt="image" src="https://github.com/user-attachments/assets/8ddd8fd0-c505-43e6-82b3-74af56ced689" />
 
 
 Result:
@@ -85,12 +117,23 @@ Algorithm:
 4.	Call the enqueue function as needed.
 
 Program:
-
-//type your code here
-
+```
+float queue[50];
+int front,rear,size=5;
+void enqueue(float data)
+{
+    if(front==-1||front<size)
+    {
+        front=0;
+        rear++;
+        queue[rear]=data;
+    }
+}
+```
 Output:
 
-//paste your output here
+<img width="751" height="442" alt="image" src="https://github.com/user-attachments/assets/ba1f46eb-0e95-48a1-a3a8-477bec69cfcb" />
+
 
 Result:
 Thus, the program to insert elements in queue using array is verified successfully.
@@ -120,12 +163,25 @@ o	After deletion, check if the front pointer has passed the rear pointer (front 
 
 
 Program:
-
-//type your code here
-
+```
+int queue[50];
+int front, rear,i;
+void dequeue()
+{
+    if(front==-1||front>rear)
+    {
+        printf("Queue");
+    }
+    else
+    {
+        front++;
+    }
+}
+```
 Output:
 
-//paste your output here
+<img width="777" height="641" alt="image" src="https://github.com/user-attachments/assets/e094dc6a-25c8-4005-a726-b9bb9b27f655" />
+
 
 
 Result:
