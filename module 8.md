@@ -15,40 +15,41 @@ Algorithm:
 4.	Exit the program.
  
 Program:
-
 ```
 #include <stdio.h>
 
-int main()
-{
+int main() {
     int n;
-
     scanf("%d", &n);
 
-    switch(n)
-    {
-        case 0: printf("zero"); break;
-        case 1: printf("one"); break;
-        case 2: printf("two"); break;
-        case 3: printf("three"); break;
-        case 4: printf("four"); break;
-        case 5: printf("five"); break;
-        case 6: printf("six"); break;
-        case 7: printf("seven"); break;
-        case 8: printf("eight"); break;
-        case 9: printf("nine"); break;
-        default: printf("invalid");
+    if (n >= 71 && n <= 79) {
+        switch (n) {
+            case 71: printf("seventy one\n"); break;
+            case 72: printf("seventy two\n"); break;
+            case 73: printf("seventy three\n"); break;
+            case 74: printf("seventy four\n"); break;
+            case 75: printf("seventy five\n"); break;
+            case 76: printf("seventy six\n"); break;
+            case 77: printf("seventy seven\n"); break;
+            case 78: printf("seventy eight\n"); break;
+            case 79: printf("seventy nine\n"); break;
+        }
+    } 
+    else if (n > 79) {
+        printf("Greater than 79\n");
     }
 
     return 0;
 }
 ```
-Output:
 
-```
-5
-five
-```
+
+
+
+Output:
+<img width="806" height="362" alt="image" src="https://github.com/user-attachments/assets/d76fec41-4927-4661-966d-a2c8b91648d3" />
+
+
 Result:
 Thus, the program is verified successfully
  
@@ -67,41 +68,30 @@ Program:
 ```
 #include <stdio.h>
 
-int main()
-{
-    int n, digit;
+int main() {
+    char str[1000];
     int freq[10] = {0};
 
-    scanf("%d", &n);
+    scanf("%s", str);
 
-    if (n == 0)
-    {
-        freq[0] = 1;
-    }
-    else
-    {
-        while (n > 0)
-        {
-            digit = n % 10;
-            freq[digit]++;
-            n = n / 10;
-        }
+    for (int i = 0; str[i] != '\0'; i++) {
+        if (str[i] >= '0' && str[i] <= '9')
+            freq[str[i] - '0']++;
     }
 
     for (int i = 0; i < 10; i++)
-    {
         printf("%d ", freq[i]);
-    }
 
     return 0;
 }
 ```
 
+
+
 Output:
-```
-1223344556
-0 1 2 2 2 2 1 0 0 0
-```
+<img width="825" height="222" alt="image" src="https://github.com/user-attachments/assets/c185d202-159e-47ea-92dc-626879b2357e" />
+
+
 Result:
 Thus, the program is verified successfully
 
@@ -124,79 +114,66 @@ Free the memory allocated for each string in s Free the memory allocated for s
  
 Program:
 ```
+
 #include <stdio.h>
 #include <string.h>
-
-// Function to swap two characters
-void swap(char *a, char *b)
-{
-    char temp = *a;
+#include <stdlib.h>
+void swap(char **a, char **b) {
+    char *temp = *a;
     *a = *b;
     *b = temp;
 }
 
-// Function to sort the string
-void sort(char str[], int n)
-{
-    int i, j;
-    for(i = 0; i < n - 1; i++)
-    {
-        for(j = i + 1; j < n; j++)
-        {
-            if(str[i] > str[j])
-            {
-                swap(&str[i], &str[j]);
-            }
-        }
-    }
+int next_permutation(char *arr[], int n) {
+    int i = n - 2;
+    while (i >= 0 && strcmp(arr[i], arr[i + 1]) >= 0)
+        i--;
+    if (i < 0)
+        return 0;
+    int j = n - 1;
+    while (strcmp(arr[i], arr[j]) >= 0)
+        j--;
+    swap(&arr[i], &arr[j]);
+    for (int l = i + 1, r = n - 1; l < r; l++, r--)
+        swap(&arr[l], &arr[r]);
+    return 1;
 }
 
-// Function to generate permutations
-void permute(char str[], int l, int r)
-{
-    int i;
-
-    if(l == r)
-    {
-        printf("%s\n", str);
-        return;
-    }
-
-    for(i = l; i <= r; i++)
-    {
-        swap(&str[l], &str[i]);
-        sort(str + l + 1, r - l);
-        permute(str, l + 1, r);
-        swap(&str[l], &str[i]);
-        sort(str + l, r - l + 1);
-    }
+int compare(const void *a, const void *b) {
+    return strcmp(*(const char **)a, *(const char **)b);
 }
 
-int main()
-{
-    char str[20];
-
-    scanf("%s", str);
-
-    int n = strlen(str);
-
-    sort(str, n);
-
-    permute(str, 0, n - 1);
-
+int main() {
+    int n;
+    scanf("%d", &n);
+    char **arr = (char **)malloc(n * sizeof(char *));
+    for (int i = 0; i < n; i++) {
+        arr[i] = (char *)malloc(101 * sizeof(char)); 
+        scanf("%s", arr[i]);
+    }
+        qsort(arr, n, sizeof(char *), compare);
+    
+    do {
+        for (int i = 0; i < n; i++)
+            printf("%s%c", arr[i], i == n - 1 ? '\n' : ' ');
+    } while (next_permutation(arr, n));
+    for (int i = 0; i < n; i++)
+        free(arr[i]);
+    free(arr);
+    
     return 0;
 }
 ```
+
+
 Output:
-```
-ABC
-ABC
-ACB
-BAC
-BCA
-CAB
-CBA
-```
+
+<img width="691" height="542" alt="image" src="https://github.com/user-attachments/assets/3171519e-7dba-4f25-845a-7f80c402584d" />
+
+
+
+
+
 Result:
 Thus, the program is verified successfully
  
@@ -217,51 +194,34 @@ Program:
 ```
 #include <stdio.h>
 
-int main()
-{
-    int n;
-    scanf("%d", &n);
-
+void printPattern(int n) {
     int size = 2 * n - 1;
-
-    for (int i = 0; i < size; i++)
+    for (int i = 0; i < size; i++) 
     {
-        for (int j = 0; j < size; j++)
+
+        for (int j = 0; j < size; j++) 
         {
-            int top = i;
-            int left = j;
-            int right = size - 1 - j;
-            int bottom = size - 1 - i;
-
-            int min = top;
-
-            if (left < min)
-                min = left;
-            if (right < min)
-                min = right;
-            if (bottom < min)
-                min = bottom;
-
-            printf("%d ", n - min);
+            int value = n - (i < j ? (i < size - j - 1 ? i : size - j - 1) : (j < size - i - 1 ? j : size - i - 1));
+            printf("%d ", value);
         }
         printf("\n");
     }
+}
 
+int main() {
+    int n;
+    scanf("%d", &n);
+    printPattern(n);
     return 0;
 }
 ```
 
 Output:
-```
-4
-4 4 4 4 4 4 4
-4 3 3 3 3 3 4
-4 3 2 2 2 3 4
-4 3 2 1 2 3 4
-4 3 2 2 2 3 4
-4 3 3 3 3 3 4
-4 4 4 4 4 4 4
-```
+<img width="805" height="707" alt="image" src="https://github.com/user-attachments/assets/fbe333e5-085c-4d3c-9a2f-1687b2690225" />
+
+
+
+
 Result:
 Thus, the program is verified successfully
 
@@ -287,35 +247,30 @@ o	Call the square() function and display the result.
 Program:
 ```
 #include <stdio.h>
-
-int square();
-
-int main()
-{
-    int result;
-
-    result = square();
-
-    printf("Square = %d", result);
-
+void square();
+int main(){
+    square();
     return 0;
 }
-
-int square()
-{
-    int n;
-
-    printf("Enter a number: ");
-    scanf("%d", &n);
-
-    return n * n;
+void square(){
+    int a;
+    scanf("%d",&a);
+    float ans = a*a;
+    printf("The square of %d is : %.2f",a,ans);
 }
 ```
+
+
+ 
+
+
+
+
 Output:
-```
-Enter a number: 6
-Square = 36
-```
+
+<img width="831" height="262" alt="image" src="https://github.com/user-attachments/assets/6dde4da1-5fef-4a76-88a6-593332fcef00" />
+
+
 Result:
 Thus, the program is verified successfully
 
